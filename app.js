@@ -18,6 +18,8 @@ app.set("view engine", "ejs");
 
 console.log(process.env.NODE_ENV);
 
+require("dotenv").config();
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
