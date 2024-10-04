@@ -6,10 +6,10 @@ const ownerSchema = mongoose.Schema({
   password: String,
   gstin: String,
   picture: String,
-  products: {
-    type: Array,
-    default: [],
-  },
+  products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "product",
+  }],
 });
 
 module.exports = mongoose.model("owner", ownerSchema);

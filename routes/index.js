@@ -19,7 +19,6 @@ router.get("/shop",isLoggedIn, async function (req, res) {
 router.get("/cart", isLoggedIn, async function (req, res) {
   const user = await userModel.findOne({email: req.user.email}).populate("cart");
   const cartItems = user.cart;
-  console.log(cartItems);
   res.render("cart.ejs", {cartItems})
 })
 
@@ -30,6 +29,7 @@ router.get("/addtocart/:productid", isLoggedIn, async function (req, res) {
   req.flash("success", "Added to cart");
   res.redirect("/shop");
 })
+
 
 router.get("/logout", function (req, res) {
   res.clearCookie("token");

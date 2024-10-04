@@ -29,14 +29,18 @@ router.get("/", function (req, res) {
   res.render("owner-login.ejs")
 })
 
-router.get("/admin",isAdmin, function (req, res) {
-  res.render("admin.ejs")
+router.get("/admin",isAdmin, async function (req, res) {
+  const admin = await ownerModel.findOne({email: req.admin.email}).populate("products");
+  const products = admin.products;
+
+  res.render("admin.ejs", {products});
 })
 
 router.get("/createproduct", isAdmin, function(req, res) {
   const success = req.flash("success", "Admin verified")
   res.render("createproducts.ejs", {success})
 })
+
 
 router.post("/loginadmin", loginAdmin);
 
