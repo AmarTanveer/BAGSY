@@ -6,7 +6,9 @@
       </span>
   </div>
   <% } %>
-<div class="w-full h-screen flex justify-center items-center p-60 gap-44">
+<div class="w-full h-screen flex flex-col justify-center items-center">
+  <div class="w-full h-[80%] flex justify-center items-center pt-40 px-60 pb-10 gap-44">
+  
   <div class="w-1/2 flex items-center justify-center">
     <div class="flex flex-col gap-3 w-full">
       <h1 class="text-3xl font-medium">
@@ -41,7 +43,9 @@
           value="Create new account"
         />
       </form>
+      
     </div>
+   
   </div>
   <div class="w-0.5 bg-slate-500 h-1/2"></div>
   <div class="w-1/2 flex items-center justify-center">
@@ -70,5 +74,13 @@
       </form>
     </div>
   </div>
+  
 </div>
+  <div class="w-full h-[20%] flex items-center justify-center gap-5">
+    <h1 class="my-4">Are you an admin?</h1>
+    <a class="py-3 px-7 bg-blue-500  text-white rounded-full" href="/owners">Login here</a>
+  </div>
+</div>
+
+
 <%- include('./partials/footer') %>

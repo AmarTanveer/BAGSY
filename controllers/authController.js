@@ -2,6 +2,7 @@ const userModel = require("../models/user-model");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../utils/generateToken");
 const cookieParser = require("cookie-parser");
+const ownerModel = require("../models/owner-model");
 
 module.exports.registerUser = async function (req, res) {
   try {
@@ -55,3 +56,25 @@ module.exports.loginUser = async function (req, res) {
   // res.status(200).send({ message: "Login successful", token });
   return res.redirect("/shop");
 };
+
+module.exports.loginAdmin = async function (req, res) {
+  const {email, password} = req.body;
+
+  let admin = await ownerModel.findOne({ email: email, password: password});
+  if (!admin) {
+    req.flash("error", "Email or Password is incorrect");
+    res.status(500).send("Wrong email or password");
+    return res.redirect("/owners");
+  }
+
+  const result = bcrypt.compare(password, admin.password);
+  if (!result) {
+    req.flash("error", "Email or Password is incorrect");
+    res.status(500).send("Wrong email or password");
+    return res.redirect("/");
+  }
+
+  const token = generateToken(admin);
+  res.cookie("token", token);
+  return res.redirect("/owners/admin")
+}
