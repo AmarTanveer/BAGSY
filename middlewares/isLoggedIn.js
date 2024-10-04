@@ -14,6 +14,7 @@ module.exports = async function (req, res, next) {
       .select("-password");
 
     req.user = user;
+    res.locals.isUserLoggedIn = true;
     next();
   } catch (err) {
     req.flash("error", "Something went wrong");

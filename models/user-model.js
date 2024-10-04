@@ -7,10 +7,10 @@ const userSchema = mongoose.Schema({
   contact: Number,
   picture: String,
   isadmin: Boolean,
-  cart: {
-    type: Array,
-    default: [],
-  },
+  cart: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:  "product"
+  }],
   orders: {
     type: Array,
     default: [],
