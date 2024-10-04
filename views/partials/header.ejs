@@ -8,22 +8,23 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
   </head>
 
   <body class="font-sans">
- 
-      <nav
-        class="w-full flex justify-between fixed top-0 left-0 px-5 py-3  bg-white"
-      >
-        <a class="text-xl font-black" href="/logout">Bagsy</a>
-        <% var isUserLoggedIn = typeof(isUserLoggedIn) === "undefined" ? false :
-        isUserLoggedIn%> <% if(isUserLoggedIn) { %>
-        <div class="flex gap-5">
-          <a href="/shop">Shop</a>
-          <a href="/cart">Cart</a>
-          <a href="">My Account</a>
-          <a class="text-red-600" href="/logout">Logout</a>
-        </div>
-        <% } %>
-      </nav>
+    <nav
+      class="w-full flex justify-between fixed top-0 left-0 px-5 py-3 bg-white"
+    >
+      <a class="text-xl font-black" href="/logout">Bagsy</a>
+      <% var isUserLoggedIn = typeof(isUserLoggedIn) === "undefined" ? false :
+      isUserLoggedIn%> <% if(isUserLoggedIn) { %>
+      <div class="flex gap-5">
+        <a href="/shop">Shop</a>
+        <a href="/cart">Cart</a>
+        <a href="">My Account</a>
+        <a class="text-red-600" href="/logout">Logout</a>
+      </div>
+      <% } %>
+    </nav>
+  </body>
+</html>
