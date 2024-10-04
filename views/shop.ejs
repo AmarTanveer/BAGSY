@@ -9,10 +9,10 @@
   <div class="w-[25%] flex h-screen flex-col items-start">
     <div class="flex items-center gap-2">
       <h3>sort by</h3>
-      <form action="/shop">
-        <select class="border-[1px] px-2 py-1" name="sortby" id="">
-          <option value="popular">Popular</option>
-          <option value="newest">Newest</option>
+      <form action="/shop" method="GET">
+        <select class="border-[1px] px-2 py-1" name="sortby" onchange="this.form.submit()">
+          <option value="popular" <% if(sortby === 'popular'){ %> selected <% } %>>Popular</option>
+          <option value="newest" <% if(sortby === 'newest'){ %> selected <% } %>>Newest</option>
         </select>
       </form>
     </div>

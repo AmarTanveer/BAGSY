@@ -10,11 +10,22 @@ router.get("/", function (req, res) {
   res.render("index.ejs", { error, success });
 });
 
-router.get("/shop",isLoggedIn, async function (req, res) {
-  const products = await productModel.find();
+router.get("/shop", isLoggedIn, async function (req, res) {
+  const sortby = req.query.sortby || 'popular'; // Default to 'popular'
+  let sortOptions = {};
+
+  // Sort by 'newest' (ObjectId is timestamp-based)
+  if (sortby === 'newest') {
+    sortOptions = { _id: -1 }; // Sort by ObjectID in descending order (newest first)
+  }
+
+  // Fetch and sort products based on the selected option
+  const products = await productModel.find().sort(sortOptions);
+  
   const success = req.flash("success");
-  res.render("shop.ejs", {products, success});
+  res.render("shop.ejs", { products, success, sortby });
 });
+
 
 router.get("/cart", isLoggedIn, async function (req, res) {
   const user = await userModel.findOne({email: req.user.email}).populate("cart");
