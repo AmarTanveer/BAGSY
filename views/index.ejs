@@ -1,5 +1,11 @@
 <%- include('./partials/header') %>
-
+<% if(error.length>0){ %>
+  <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
+      <span class="inline-block mt-1 mb-1 text-white">
+          <%= error %>
+      </span>
+  </div>
+  <% } %>
 <div class="w-full h-screen flex justify-center items-center p-60 gap-44">
   <div class="w-1/2 flex items-center justify-center">
     <div class="flex flex-col gap-3 w-full">
@@ -7,12 +13,12 @@
         Welcome to <span class="text-rose-500 font-extrabold">Bagsy</span>
       </h1>
       <h3>Create new account</h3>
-      <form class="flex flex-col gap-3" autocomplete="off" action="submit">
+      <form class="flex flex-col gap-3" autocomplete="off" action="/users/register" method="post">
         <input
           class="border-2 rounded-md py-2 px-4 focus:border-rose-500 outline-none"
           type="text"
-          name="name"
-          id="name"
+          name="fullname"
+          id="fullname"
           placeholder="Full Name"
         />
         <input
@@ -41,7 +47,7 @@
   <div class="w-1/2 flex items-center justify-center">
     <div class="flex flex-col gap-3 w-full">
       <h3>Login to your account</h3>
-      <form class="flex flex-col gap-3" autocomplete="off" action="submit">
+      <form class="flex flex-col gap-3" autocomplete="off" action="/users/login" method="post">
         <input
           class="border-2 rounded-md py-2 px-4 focus:border-rose-500 outline-none"
           type="email"
@@ -65,3 +71,4 @@
     </div>
   </div>
 </div>
+<%- include('./partials/footer') %>

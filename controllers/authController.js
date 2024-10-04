@@ -1,6 +1,6 @@
 const userModel = require("../models/user-model");
 const bcrypt = require("bcrypt");
-const {generateToken} = require("../utils/generateToken");
+const { generateToken } = require("../utils/generateToken");
 const cookieParser = require("cookie-parser");
 
 module.exports.registerUser = async function (req, res) {
@@ -24,7 +24,8 @@ module.exports.registerUser = async function (req, res) {
           email,
           password: hash,
         });
-        return res.status(200).send(createdUser);
+
+        return res.redirect("/");
       });
     });
   } catch (err) {
@@ -35,17 +36,22 @@ module.exports.registerUser = async function (req, res) {
 module.exports.loginUser = async function (req, res) {
   const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email });
+  const user = await userModel.findOne({ email: email });
   if (!user) {
-    return res.status(500).send("Wrong email or password");
+    req.flash("error", "Email or Password is incorrect");
+    res.status(500).send("Wrong email or password");
+    return res.redirect("/");
   }
   const result = await bcrypt.compare(password, user.password);
-  
+
   if (!result) {
-    return res.status(500).send("Wrong email or password");
-  } 
-  
+    req.flash("error", "Email or Password is incorrect");
+    res.status(500).send("Wrong email or password");
+    return res.redirect("/");
+  }
+
   const token = generateToken(user);
   res.cookie("token", token);
-  return res.status(200).send({ message: "Login successful", token });
+  // res.status(200).send({ message: "Login successful", token });
+  return res.redirect("/shop");
 };
