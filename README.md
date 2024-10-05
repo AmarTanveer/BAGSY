@@ -54,12 +54,14 @@ The application uses three main databases:
    git clone https://github.com/amartanveer/bagsy.git
    cd bagsy
 
-   Install the dependencies: npm install
+2.  Install the dependencies:
+    ```
+    npm install
+    
+3. Set up your MongoDB connection and any necessary environment variables. You can use a .env file to store them.
 
-2. Set up your MongoDB connection and any necessary environment variables. You can use a .env file to store them.
-
-3. Start the server:
+4. Start the server:
    ```
    node app.js
 
-4. Open your browser and visit http://localhost:3000 to view the application.
+5. Open your browser and visit http://localhost:3000 to view the application.
