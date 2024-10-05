@@ -37,26 +37,37 @@ module.exports.registerUser = async function (req, res) {
 module.exports.loginUser = async function (req, res) {
   const { email, password } = req.body;
 
-  const user = await userModel.findOne({ email: email });
-  if (!user) {
-    req.flash("error", "Email or Password is incorrect");
-    res.status(500).send("Wrong email or password");
-    return res.redirect("/");
-  }
-  const result = await bcrypt.compare(password, user.password);
+  try {
+    // Find the user by email
+    const user = await userModel.findOne({ email: email });
+    
+    // If user not found, redirect with error message
+    if (!user) {
+      req.flash("error", "Email or Password is incorrect");
+      return res.redirect("/"); 
+    }
 
-  if (!result) {
-    req.flash("error", "Email or Password is incorrect");
-    res.status(500).send("Wrong email or password");
-    return res.redirect("/");
-  }
+    // Compare password with hashed password in the database
+    const result = await bcrypt.compare(password, user.password);
+    
+    // If password doesn't match, redirect with error message
+    if (!result) {
+      req.flash("error", "Email or Password is incorrect");
+      return res.redirect("/"); 
+    }
 
-  const token = generateToken(user);
-  res.cookie("token", token);
-  // res.status(200).send({ message: "Login successful", token });
-  return res.redirect("/shop");
+    // Generate JWT token for the user
+    const token = generateToken(user);
+    res.cookie("token", token); // Set the token in cookies
+
+    // Redirect to the shop page after successful login
+    return res.redirect("/shop"); 
+  } catch (error) {
+    console.error(error); // Log the error for debugging
+    req.flash("error", "Something went wrong. Please try again.");
+    return res.redirect("/"); // Redirect on error
+  }
 };
-
 module.exports.loginAdmin = async function (req, res) {
   const {email, password} = req.body;
 

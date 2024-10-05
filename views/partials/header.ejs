@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="shortcut icon" href="/images/Bagsy.svg" type="image/x-icon">
+    <title>Bagsy</title>
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -15,7 +16,10 @@
     <nav
       class="w-full flex justify-between fixed top-0 left-0 px-5 py-3 bg-white"
     >
-      <a class="text-xl font-black" href="/logout">Bagsy</a>
+    <a class="text-xl text-white bg-rose-500 px-5 py-2 font-black text-center" href="/logout">
+      Bagsy
+  </a>
+  
       <% var isUserLoggedIn = typeof(isUserLoggedIn) === "undefined" ? false :
       isUserLoggedIn%> <% if(isUserLoggedIn) { %>
       <div class="flex gap-5">
