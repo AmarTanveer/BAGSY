@@ -35,6 +35,7 @@ app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 app.use("/owners", ownersRouter);
 
-app.listen(3000, function () {
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
   console.log("Running");
 });
