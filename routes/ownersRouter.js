@@ -21,7 +21,8 @@ const isAdmin = require("../middlewares/isAdmin");
     };
     
     await ownerModel.create(createdOwner);
-    res.status(201).send(createdOwner);
+    // res.status(201).send(createdOwner);
+    res.redirect("/");
   });
 // }
 
